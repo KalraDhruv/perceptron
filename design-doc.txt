@@ -1,0 +1,7 @@
+Design Document (Perceptron)
+Each input consisting of any n dimensions is going to be stored in each column of the matrix.
+Each row corresponds to some feature of the given data.
+The initial weight would be initialized randomly and adjusted using the following algorithm:
+weights += learning_rate * error * input
+The function used in perceptron is a step function which makes any positive number 1 and negative number 0.
+Following this the problem should converge. 
