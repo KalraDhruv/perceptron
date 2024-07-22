@@ -5,3 +5,4 @@ The initial weight would be initialized randomly and adjusted using the followin
 weights += learning_rate * error * input
 The function used in perceptron is a step function which makes any positive number 1 and negative number 0.
 Following this the problem should converge. 
+

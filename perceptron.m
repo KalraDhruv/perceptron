@@ -1,19 +1,22 @@
 % Step 1 Initializing inputs 
-inputs = [1 1 0 0; 1 0 1 0];
+
+% The bias has been added in the form of all 1s in the last row 
+inputs = [1 1 0 0; 1 0 1 0; 1 1 1 1];
 
 % The below targets are for OR Operation
-targets = [1 1 1 0];
+% targets = [1 1 1 0];
 
 % The below targets are for AND Operation
-% targets = [1 0 0 0]
+targets = [1 0 0 0];
 learning_rate =0.1;
-epochs = 10;
+epochs = 100;
 
 % Step 2 Initializing weights for the system
 [rows, columns] = size(inputs);
 
-weights = rand(rows);
-disp('The weights are: ');
+% Adjusted for bias
+weights = [rand(1, rows-1), 1];
+disp('Initial Weights: ');
 disp(weights);
 
 % Step 4 Training the Perceptron
@@ -22,7 +25,7 @@ for epoch = 1:epochs
         input = inputs(:,i);
         target = targets(i);
 
-        weighted_sum = input * weights';
+        weighted_sum = weights * input;
         output = step_function(weighted_sum);
 
         error = target-output;
@@ -30,9 +33,18 @@ for epoch = 1:epochs
     end
 end
 
+% Step 5 Testing the trained perceptron with all inputs
+disp('Final Weights:');
+disp(weights);
+disp('Classification results for the inputs: ');
+for i = 1:columns
+    input = inputs(:,i);
+    weighted_sum = weights * input;
+    output = step_function(weighted_sum);
+    disp(['Input: ', mat2str(input'), ' Output: ', num2str(output)]);
+end
 
 % Step 3 Defining the stepFunction 
-
 function result = step_function(number)
     if number >= 0
         result = 1 ;
@@ -40,3 +52,5 @@ function result = step_function(number)
         result = 0;
     end
 end
+
+
